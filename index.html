@@ -33,6 +33,7 @@
       .then(function (response) {
         // handle success
         console.log(response);
+        console.log(getUrlParameter('token'));
         
         if(response.data.bpi.USD.rate_float > 9000) {
           gifURL = 'https://i.giphy.com/tPKoWQJk3cEbC.gif';
