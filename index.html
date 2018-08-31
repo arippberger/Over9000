@@ -28,7 +28,6 @@
     
     let gifURL = '';
   
-    // Make a request for a user with a given ID
     axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
       .then(function (response) {
         // handle success
@@ -36,13 +35,14 @@
         
         if(response.data.bpi.USD.rate_float > 9000) {
           gifURL = 'https://i.giphy.com/tPKoWQJk3cEbC.gif';
-          const payload = JSON.stringify({"text": gifURL});
-          const token = getUrlParameter('token');
-          const url = 'https://hooks.slack.com/services/' + token;
-          axios.post(url, payload);
         } else {
           gifURL = 'https://media.giphy.com/media/fnm3kPuXazD7sTZTqW/giphy.gif';
         }
+      
+        const payload = JSON.stringify({"text": gifURL});
+        const token = getUrlParameter('token');
+        const url = 'https://hooks.slack.com/services/' + token;
+        axios.post(url, payload);
       
         document.getElementById('output').innerHTML = '<img src="' + gifURL +'" alt="Bitcoin price">';
         
