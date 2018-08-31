@@ -29,7 +29,7 @@
         // handle success
         console.log(response);
         
-        if(reponse.data.bpi.USD.rate_float < 9000) {
+        if(response.data.bpi.USD.rate_float > 9000) {
           gifURL = 'https://i.giphy.com/tPKoWQJk3cEbC.gif'
         } else {
           gifURL = 'https://media.giphy.com/media/fnm3kPuXazD7sTZTqW/giphy.gif';
