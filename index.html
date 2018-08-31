@@ -15,8 +15,7 @@
   <![endif]-->
   
   <div id="output"></div>
-  <!-- Load Babel -->
-  <!--<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>-->
+
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <!-- Your custom script here -->
   <script type="text/javascript">
@@ -30,21 +29,15 @@
         console.log(response);
         
         if(response.data.bpi.USD.rate_float > 9000) {
-          gifURL = 'https://i.giphy.com/tPKoWQJk3cEbC.gif'
+          gifURL = 'https://i.giphy.com/tPKoWQJk3cEbC.gif';
+          let payload = JSON.stringify({"text": gifURL});
+          const url = 'https://hooks.slack.com/services/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';
+          axios.post(url, payload);
         } else {
           gifURL = 'https://media.giphy.com/media/fnm3kPuXazD7sTZTqW/giphy.gif';
         }
       
-        let payload = JSON.stringify({"text": gifURL});
-        
-        console.log(payload);
-        
         document.getElementById('output').innerHTML = '<img src="' + gifURL +'" alt="Bitcoin price">';
-
-        //const url = 'https://hooks.slack.com/services/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';
-        //testchannel
-        const url = 'https://hooks.slack.com/services/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';
-        axios.post(url, payload);
         
       })
       .catch(function (error) {
