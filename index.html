@@ -20,6 +20,8 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <!-- Your custom script here -->
   <script type="text/babel">
+    let gifURL = '';
+  
     // Make a request for a user with a given ID
     axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
       .then(function (response) {
@@ -27,17 +29,28 @@
         console.log(response);
         
         if(reponse.data.bpi.USD.rate_float < 9000) {
-            document.getElementById('output').innerHTML = '<img src="https://i.giphy.com/media/tPKoWQJk3cEbC/giphy.webp" onerror="this.onerror=null;this.src='https://i.giphy.com/tPKoWQJk3cEbC.gif';" alt="Over9000">';
+          gifURL = 'https://i.giphy.com/tPKoWQJk3cEbC.gif'
         } else {
-            document.getElementById('output').innerHTML = '<img src="https://media.giphy.com/media/fnm3kPuXazD7sTZTqW/giphy.gif" alt="Sad Yamcha">';
+          gifURL = 'https://media.giphy.com/media/fnm3kPuXazD7sTZTqW/giphy.gif';
         }
+        
       })
       .catch(function (error) {
         // handle error
         console.log(error);
       })
       .then(function () {
-        // always executed
+        //const url = 'https://hooks.slack.com/services/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';
+        //testchannel
+        const url = 'https://hooks.slack.com/services/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';
+        const options = {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          data: {'text': gifURL},
+          url,
+        };
+        axios(options);
+        document.getElementById('output').innerHTML = '<img src="' + gifURL +'" alt="Bitcoin price">';
       });
       
   </script>
