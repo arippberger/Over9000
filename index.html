@@ -33,12 +33,12 @@
       .then(function (response) {
         // handle success
         console.log(response);
-        console.log(getUrlParameter('token'));
         
         if(response.data.bpi.USD.rate_float > 9000) {
           gifURL = 'https://i.giphy.com/tPKoWQJk3cEbC.gif';
-          let payload = JSON.stringify({"text": gifURL});
-          const url = 'https://hooks.slack.com/services/' + getUrlParameter('token');
+          const payload = JSON.stringify({"text": gifURL});
+          const token = getUrlParameter('token');
+          const url = 'https://hooks.slack.com/services/' + token;
           axios.post(url, payload);
         } else {
           gifURL = 'https://media.giphy.com/media/fnm3kPuXazD7sTZTqW/giphy.gif';
