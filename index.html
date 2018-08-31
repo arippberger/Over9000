@@ -19,10 +19,26 @@
   <div id="output"></div>
   <!-- Load Babel -->
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <!-- Your custom script here -->
   <script type="text/babel">
-    const getMessage = () => "Hello World";
-    document.getElementById('output').innerHTML = getMessage();
+    const axios = require('axios');
+
+    // Make a request for a user with a given ID
+    axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+      .then(function (response) {
+        // handle success
+        console.log(response);
+        document.getElementById('output').innerHTML = response;
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+      
   </script>
   
 </body>
