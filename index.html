@@ -16,10 +16,10 @@
   
   <div id="output"></div>
   <!-- Load Babel -->
-  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <!--<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>-->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <!-- Your custom script here -->
-  <script type="text/babel">
+  <script type="text/javascript">
     //axios.defaults.headers.post['Content-Type'] = 'application/json';
     let gifURL = '';
   
@@ -41,12 +41,16 @@
         console.log(error);
       })
       .then(function () {
+        let payload = JSON.stringify({"text": gifURL});
+        
+        console.log(payload);
+        
         document.getElementById('output').innerHTML = '<img src="' + gifURL +'" alt="Bitcoin price">';
 
         //const url = 'https://hooks.slack.com/services/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';
         //testchannel
         const url = 'https://hooks.slack.com/services/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';
-        axios.post(url, JSON.stringify({'text': gifURL}));
+        axios.post(url, payload);
       });
       
   </script>
